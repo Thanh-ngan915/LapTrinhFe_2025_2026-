@@ -1,0 +1,46 @@
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.home-card {
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+}
+
+.home-card h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.home-card p {
+    color: #666;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.btn-logout {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-logout:hover {
+    transform: translateY(-2px);
+    background: #c0392b;
+}
