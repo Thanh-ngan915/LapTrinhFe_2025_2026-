@@ -7,18 +7,25 @@ const useMessages = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Xử lý khi nhận danh sách tin nhắn cũ
     const handleMessages = (data) => {
       if (data.data && Array.isArray(data.data)) {
         dispatch(setMessages(data.data));
       }
     };
-    
+
     websocketService.on('GET_ROOM_CHAT_MES', handleMessages);
-    
+
     websocketService.on('SEND_CHAT', (data) => {
-      // Data trả về đôi khi nằm trong data.data hoặc trực tiếp trong data
-      const msg = data.data || data; 
+      const raw = data.data || data;
+
+      const msg = (typeof raw === 'string') ? { mes: raw, time: new Date().toLocaleTimeString() } : {
+        from: raw.from || raw.user || raw.sender || raw.name || 'Unknown',
+        mes: raw.mes || raw.message || raw.msg || raw.text || (typeof raw === 'string' ? raw : ''),
+        time: raw.createAt || raw.create_at || raw.time || raw.t || raw.timestamp || new Date().toLocaleTimeString(),
+        to: raw.to,
+        type: raw.type || (raw.room ? 'room' : (raw.to ? 'people' : undefined)),
+      };
+
       dispatch(addMessage(msg));
     });
 
